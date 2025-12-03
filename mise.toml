@@ -1,0 +1,17 @@
+[tools]
+bun = "latest"
+
+[env]
+DATABASE_URL = "local.db"
+
+[tasks."db:generate"]
+run = "bunx drizzle-kit generate --dialect sqlite --schema ./src/lib/server/db/schema.ts"
+description = "Generate database schema"
+
+[tasks."db:migrate"]
+run = "bun run ./src/lib/server/db/migrate.ts"
+description = "Run database migrations"
+
+[tasks."db:seed"]
+run = "bun run ./src/lib/server/db/seed.ts"
+description = "Seed database"

@@ -1,6 +1,7 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const user = sqliteTable('user', {
-	id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
-	age: integer('age')
+export const movies = sqliteTable("movies", {
+  id: integer("id").primaryKey(),
+  title: text("name"),
+  releaseYear: integer("release_year"),
 });
