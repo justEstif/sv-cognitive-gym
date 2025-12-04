@@ -2,7 +2,6 @@ import * as auth from "$lib/server/auth";
 import { db } from "$lib/server/db";
 import * as table from "$lib/server/db/schema";
 import { hash, verify } from "@node-rs/argon2";
-import { encodeBase32LowerCase } from "@oslojs/encoding";
 import { fail, redirect } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
 import type { Actions, PageServerLoad } from "./$types";
@@ -95,10 +94,9 @@ export const actions: Actions = {
 };
 
 function generateUserId() {
-  // ID with 120 bits of entropy, or about the same as UUID v4.
-  // https://bun.sh/docs/runtime/utils#bun-randomuuidv7
-  const bytes = crypto.getRandomValues(new Uint8Array(15));
-  const id = encodeBase32LowerCase(bytes);
+  // Using UUIDv7 for time-ordered, database-friendly IDs
+  // See: https://bun.sh/docs/runtime/utils#bun-randomuuidv7
+  const id = Bun.randomUUIDv7();
   return id;
 }
 

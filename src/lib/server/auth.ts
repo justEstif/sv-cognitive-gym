@@ -1,7 +1,5 @@
 import { db } from "$lib/server/db";
 import * as table from "$lib/server/db/schema";
-import { sha256 } from "@oslojs/crypto/sha2";
-import { encodeBase64url, encodeHexLowerCase } from "@oslojs/encoding";
 import type { RequestEvent } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
 
@@ -11,14 +9,15 @@ export const sessionCookieName = "auth-session";
 
 export function generateSessionToken() {
   const bytes = crypto.getRandomValues(new Uint8Array(18));
-  // this can use btoa from bun runtime
-  const token = encodeBase64url(bytes);
+  const token = bytes.toBase64({ alphabet: "base64url" });
   return token;
 }
 
 export async function createSession(token: string, userId: string) {
-  // can this use Bun.randomUUIDv7?
-  const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
+  const hasher = new Bun.CryptoHasher("sha256");
+  hasher.update(token);
+  const sessionId = hasher.digest("hex");
+
   const session: table.Session = {
     id: sessionId,
     userId,
@@ -29,8 +28,10 @@ export async function createSession(token: string, userId: string) {
 }
 
 export async function validateSessionToken(token: string) {
-  // can this use Bun.randomUUIDv7?
-  const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
+  const hasher = new Bun.CryptoHasher("sha256");
+  hasher.update(token);
+  const sessionId = hasher.digest("hex");
+
   const [result] = await db
     .select({
       // Adjust user table here to tweak returned data
