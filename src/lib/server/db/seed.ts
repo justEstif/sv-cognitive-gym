@@ -54,16 +54,32 @@ async function seed() {
 
   // Past sessions (completed mix)
   const pastSessions = [
-    { daysAgo: 14, status: "completed" as const, rating: "just_right" as const },
+    {
+      daysAgo: 14,
+      status: "completed" as const,
+      rating: "just_right" as const,
+    },
     { daysAgo: 13, status: "completed" as const, rating: "easy" as const },
-    { daysAgo: 12, status: "completed" as const, rating: "just_right" as const },
-    { daysAgo: 11, status: "completed" as const, rating: "challenging" as const },
+    {
+      daysAgo: 12,
+      status: "completed" as const,
+      rating: "just_right" as const,
+    },
+    {
+      daysAgo: 11,
+      status: "completed" as const,
+      rating: "challenging" as const,
+    },
     { daysAgo: 10, status: "missed" as const, rating: null },
     { daysAgo: 9, status: "completed" as const, rating: "just_right" as const },
     { daysAgo: 7, status: "completed" as const, rating: "easy" as const },
     { daysAgo: 6, status: "completed" as const, rating: "just_right" as const },
     { daysAgo: 5, status: "completed" as const, rating: "just_right" as const },
-    { daysAgo: 4, status: "completed" as const, rating: "challenging" as const },
+    {
+      daysAgo: 4,
+      status: "completed" as const,
+      rating: "challenging" as const,
+    },
     { daysAgo: 3, status: "completed" as const, rating: "just_right" as const },
     { daysAgo: 2, status: "completed" as const, rating: "easy" as const },
     { daysAgo: 1, status: "completed" as const, rating: "just_right" as const },
