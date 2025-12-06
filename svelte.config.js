@@ -15,6 +15,9 @@ const config = {
       out: "build",
       precompress: true,
     }),
+    experimental: {
+      remoteFunctions: true,
+    },
   },
 };
 

@@ -15,6 +15,13 @@
       "when": 1764808403086,
       "tag": "0001_round_steel_serpent",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1764985670140,
+      "tag": "0002_amused_blue_marvel",
+      "breakpoints": true
     }
   ]
 }
