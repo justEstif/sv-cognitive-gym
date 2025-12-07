@@ -73,15 +73,16 @@
 
         <div class="nav-buttons">
           <span></span>
-          <button onclick={nextStep} disabled={!focusDuration}>
-            Next
-          </button>
+          <button onclick={nextStep} disabled={!focusDuration}> Next </button>
         </div>
       </section>
     {:else if step === 2}
       <section>
         <h2>Which days will you train?</h2>
-        <p>Select the days you want to have focus sessions. Rest days are just as important as work days.</p>
+        <p>
+          Select the days you want to have focus sessions. Rest days are just as
+          important as work days.
+        </p>
 
         <div class="days-grid">
           {#each dayNames as name, i}
@@ -125,16 +126,12 @@
           </dl>
         </article>
 
-        <p>
-          You can adjust your plan anytime from the settings page.
-        </p>
+        <p>You can adjust your plan anytime from the settings page.</p>
 
         <form {...createPlan}>
           <input type="hidden" name="focusDuration" value={focusDuration} />
           <input type="hidden" name="daysPerWeek" value={daysPerWeek} />
-          {#each workDays as day}
-            <input type="hidden" name="workDays" value={day} />
-          {/each}
+          <input type="hidden" name="workDays" value={JSON.stringify(workDays)} />
 
           <div class="nav-buttons">
             <button type="button" class="outline" onclick={prevStep}>

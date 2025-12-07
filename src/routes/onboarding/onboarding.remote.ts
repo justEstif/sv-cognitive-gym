@@ -8,7 +8,7 @@ function generateSessions(
   planId: string,
   focusDuration: number,
   workDays: number[],
-  weeksToGenerate: number = 4
+  weeksToGenerate: number = 4,
 ): table.NewWorkSession[] {
   const sessions: table.NewWorkSession[] = [];
   const today = new Date();
@@ -36,13 +36,14 @@ function generateSessions(
   return sessions;
 }
 
+// TODO create a schema for the remote function below
 export const createPlan = form("unchecked", async (data) => {
   const { locals } = getRequestEvent();
   if (!locals.user) redirect(307, "/auth");
 
   const focusDuration = Number(data.focusDuration);
   const daysPerWeek = Number(data.daysPerWeek);
-  const workDays = (Array.isArray(data.workDays) ? data.workDays : [data.workDays]).map(Number);
+  const workDays: number[] = JSON.parse(data.workDays as string);
 
   const planId = crypto.randomUUID();
 
@@ -63,7 +64,7 @@ export const createPlan = form("unchecked", async (data) => {
     planId,
     focusDuration,
     workDays,
-    4
+    4,
   );
 
   if (sessions.length > 0) {

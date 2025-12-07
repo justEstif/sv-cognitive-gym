@@ -1,7 +1,7 @@
-import { form, query, getRequestEvent } from "$app/server";
+import { form, getRequestEvent, query } from "$app/server";
 import { db } from "$lib/server/db";
-import * as table from "$lib/server/db/schema";
 import type { DifficultyRating } from "$lib/server/db/schema";
+import * as table from "$lib/server/db/schema";
 import { redirect } from "@sveltejs/kit";
 import { and, eq } from "drizzle-orm";
 
@@ -22,8 +22,8 @@ export const getCurrentSession = query(async () => {
     .where(
       and(
         eq(table.workSession.userId, locals.user.id),
-        eq(table.workSession.scheduledDate, today)
-      )
+        eq(table.workSession.scheduledDate, today),
+      ),
     )
     .limit(1);
 
@@ -38,8 +38,8 @@ export const getCurrentSession = query(async () => {
     .where(
       and(
         eq(table.userPlan.userId, locals.user.id),
-        eq(table.userPlan.isActive, true)
-      )
+        eq(table.userPlan.isActive, true),
+      ),
     )
     .limit(1);
 

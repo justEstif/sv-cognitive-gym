@@ -1,9 +1,9 @@
 <script lang="ts">
   import CalendarMonth from "$lib/components/CalendarMonth.svelte";
-  import StatsCard from "$lib/components/StatsCard.svelte";
   import Modal from "$lib/components/Modal.svelte";
-  import { getSessionsByMonth, getHistoryStats } from "./history.remote";
+  import StatsCard from "$lib/components/StatsCard.svelte";
   import type { WorkSession } from "$lib/server/db/schema";
+  import { getHistoryStats, getSessionsByMonth } from "./history.remote";
 
   const now = new Date();
   let year = $state(now.getFullYear());
@@ -89,8 +89,16 @@
         <section class="stats">
           <div class="stats-grid">
             <StatsCard label="Total Sessions" value={stats.totalSessions} />
-            <StatsCard label="Total Focus Time" value={stats.totalHours} unit="hours" />
-            <StatsCard label="Longest Streak" value={stats.longestStreak} unit="days" />
+            <StatsCard
+              label="Total Focus Time"
+              value={stats.totalHours}
+              unit="hours"
+            />
+            <StatsCard
+              label="Longest Streak"
+              value={stats.longestStreak}
+              unit="days"
+            />
           </div>
         </section>
       {/await}
@@ -129,7 +137,8 @@
         <dt>Duration</dt>
         <dd>
           {#if selectedSession.actualDuration}
-            {selectedSession.actualDuration} min (planned: {selectedSession.plannedDuration} min)
+            {selectedSession.actualDuration} min (planned: {selectedSession.plannedDuration}
+            min)
           {:else}
             {selectedSession.plannedDuration} min planned
           {/if}
