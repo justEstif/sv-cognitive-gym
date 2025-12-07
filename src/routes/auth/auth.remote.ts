@@ -76,7 +76,7 @@ export const authenticate = form(authSchema, async (data, issue) => {
   redirect(303, "/");
 });
 
-export const signOut = query(async () => {
+export const signOut = form(async () => {
   const event = getRequestEvent();
   if (event.locals.session?.id) {
     await auth.invalidateSession(event?.locals.session.id);

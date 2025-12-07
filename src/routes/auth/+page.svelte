@@ -8,14 +8,6 @@
   <title>Sign In | Cognitive Gym</title>
 </svelte:head>
 
-<header class="container">
-  <nav>
-    <ul>
-      <li><strong>Cognitive Gym</strong></li>
-    </ul>
-  </nav>
-</header>
-
 <main class="container">
   <h1>Cognitive Gym</h1>
 
@@ -69,14 +61,12 @@
   </form>
 </main>
 
-<footer class="container">
-  <p>Copyright &copy; {new Date().getFullYear()} Cognitive Gym</p>
-</footer>
-
 <style>
-  .form-actions {
+  main {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    max-width: 576px;
   }
 </style>
